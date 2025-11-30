@@ -1,18 +1,14 @@
 import streamlit as st
 from rag_backend import ask_igp
 
-# ----------------------------
-# PAGE CONFIG
-# ----------------------------
+# Page Config
 st.set_page_config(
     page_title="IGP.ai",
     page_icon="🌾",
     layout="centered"
 )
 
-# ----------------------------
-# CUSTOM CSS (INDO-GANGETIC THEME)
-# ----------------------------
+# Custom CSS (INDO-GANGETIC THEME)
 st.markdown("""
 <style>
 
@@ -85,21 +81,26 @@ button {
 </style>
 """, unsafe_allow_html=True)
 
-# ----------------------------
-# HEADER
-# ----------------------------
+# Header
 st.markdown("<h1>🌾 IGP.ai</h1>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>Indo-Gangetic Agricultural Intelligence</div>", unsafe_allow_html=True)
-st.markdown("<div class='smallhint'>India • Pakistan • Nepal • Bangladesh</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Indo-Gangetic Plains Agricultural Intelligence</div>", unsafe_allow_html=True)
+st.markdown("""
+<div class='smallhint'>
+IGP.ai, or Indo-Gangetic Plains Agricultural Intelligence, is a chatbot that provides landscaping recommendations and agricultural knowledge about the areas encompassed in the 
+<a href="https://www.britannica.com/place/Indo-Gangetic-Plain" target="_blank" style="color:#1F6AE1; font-weight:600; text-decoration:underline;">
+Indo-Gangetic Plains
+</a>, 
+including <strong>India, Pakistan, Bangladesh, and Nepal</strong> 
+(Outputs are generated using referenced data from academic and botanical sources including the Biodiversity of India Database, the International Research Journal of Education & Technology, and Useful Tropical Plants).
+</div>
+""", unsafe_allow_html=True)
 
-# ----------------------------
-# USER INPUT
-# ----------------------------
-user_query = st.text_input("Ask a question about crops, soil, or climate:")
 
-# ----------------------------
-# RESPONSE
-# ----------------------------
+
+# User Input
+user_query = st.text_input("Ask a question about crops, soil, or climate in the Indo-Gangetic Plains:")
+
+# Response
 if user_query:
     with st.spinner("Consulting Indo-Gangetic knowledge base..."):
         answer = ask_igp(user_query)
