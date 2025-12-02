@@ -24,7 +24,7 @@ vector_store = Chroma(
 )
 
 # === SYSTEM PROMPT (Matches Your Rules) ===
-YSTEM_PROMPT_TEMPLATE = """
+SYSTEM_PROMPT_TEMPLATE = """
 ## Role and Goal
 You are an expert landscaping and agricultural assistant with deep, practical knowledge of the Indo-Gangetic plains. Your goal is to provide accurate, specific answers to user queries about plants.
 
@@ -75,4 +75,5 @@ def ask_igp(user_query: str) -> str:
     ])
 
     return response.content
+
 
