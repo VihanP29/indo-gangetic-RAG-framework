@@ -65,7 +65,7 @@ def ask_igp(user_query: str) -> str:
 
     # Inject into system prompt
     system_message = SYSTEM_PROMPT_TEMPLATE.format(
-        corpus_context=corpus_text
+        corpus_content=corpus_text
     )
 
     # Run GPT-4.1
