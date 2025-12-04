@@ -12,7 +12,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* === APP BACKGROUND GRADIENT === */
+/* app background gradient */
 .stApp {
     background: linear-gradient(
         135deg,
@@ -25,14 +25,14 @@ st.markdown("""
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* === MAIN HEADER === */
+/* main header */
 h1 {
     color: #1F6AE1;
     font-weight: 800;
     letter-spacing: 0.5px;
 }
 
-/* === SUBTITLE === */
+/* subtitle */
 .subtitle {
     color: #2FA36B;
     font-size: 18px;
@@ -40,14 +40,14 @@ h1 {
     font-weight: 500;
 }
 
-/* === REGION HINT === */
+/* region hint */
 .smallhint {
     color: #4A6F73;
     font-size: 14px;
     margin-bottom: 20px;
 }
 
-/* === INPUT BOX === */
+/* input box */
 div[data-baseweb="input"] input {
     background-color: #ffffff !important;
     border-radius: 12px !important;
@@ -56,7 +56,7 @@ div[data-baseweb="input"] input {
     font-size: 16px !important;
 }
 
-/* === CHAT RESPONSE CARD === */
+/* chat response card */
 .chatbox {
     background: linear-gradient(145deg, #ffffff, #F2FBF7);
     padding: 18px;
@@ -68,7 +68,7 @@ div[data-baseweb="input"] input {
     line-height: 1.6;
 }
 
-/* === BUTTON STYLE === */
+/* button style */
 button {
     background: linear-gradient(135deg, #1F6AE1, #2FA36B) !important;
     color: white !important;
