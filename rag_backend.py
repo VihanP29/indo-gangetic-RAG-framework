@@ -1,29 +1,29 @@
 import os
 from dotenv import load_dotenv
 
-# === LangChain + Chroma Imports ===
+# LangChain + Chroma Imports
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_chroma import Chroma
 
-# === ENV SETUP ===
+# Env Setup
 current_folder = os.getcwd()
 env_path = os.path.join(current_folder, ".env")
 load_dotenv(dotenv_path=env_path, override=True)
 
 if not os.getenv("OPENAI_API_KEY"):
-    raise RuntimeError("❌ OPENAI_API_KEY not found in .env file")
+    raise RuntimeError("OPENAI_API_KEY not found in .env file")
 
-# === EMBEDDINGS (Matches Your Notebook) ===
+# Embeddings
 openai_embed = OpenAIEmbeddings(model="text-embedding-3-large")
 
-# === LOAD EXISTING VECTOR STORE ===
+# Load Existing Vector Store
 vector_store = Chroma(
     embedding_function=openai_embed,
     persist_directory="./localCorpus",
     collection_name="PlantCorpus_langchain"
 )
 
-# === SYSTEM PROMPT (Matches Your Rules) ===
+# System Prompt
 SYSTEM_PROMPT_TEMPLATE = """
 ## Role and Goal
 You are an expert landscaping and agricultural assistant with deep, practical knowledge of the Indo-Gangetic plains. Your goal is to provide accurate, specific answers to user queries about plants.
@@ -48,32 +48,30 @@ You will be given context from a specialized `Plant Corpus`. This corpus is your
     `Plant ID`, `Common Name`, `Scientific Name`, `Local Name (If Applicable)`, `Region`, `Climate Requirements`, `Soil Type`, `Sun Light Needs`, `Water Needs`, `Growth Rate`, `Ecological Role`, `Traditional Uses`
 """
 
-# === GPT-4.1 MODEL ===
+# GPT4.1 Model
 model = ChatOpenAI(
     model="gpt-4.1",
     temperature=0
 )
 
-# === MAIN FUNCTION USED BY STREAMLIT ===
+# Main function used by streamlit
 def ask_igp(user_query: str) -> str:
-    # 1️⃣ Retrieve from Chroma
+    # Retrieve from Chroma
     corpus_context = vector_store.similarity_search(user_query, k=4)
 
     corpus_text = "\n\n".join([
         doc.page_content for doc in corpus_context
     ])
 
-    # 2️⃣ Inject into system prompt
+    # Inject into system prompt
     system_message = SYSTEM_PROMPT_TEMPLATE.format(
         corpus_context=corpus_text
     )
 
-    # 3️⃣ Run GPT-4.1
+    # Run GPT-4.1
     response = model.invoke([
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_query}
     ])
 
     return response.content
-
-
